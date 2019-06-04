@@ -192,7 +192,7 @@ class Asset
      * @return string
      * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
      */
-    public function style($chunkName, array $attributes = [], boolean $legacy = false): string
+    public function style($chunkName, array $attributes = [], $legacy = false): string
     {
         $defaults = ['media' => 'all', 'type' => 'text/css', 'rel' => 'stylesheet'];
 
@@ -245,7 +245,7 @@ class Asset
      * @return string
      * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
      */
-    public function script($chunkName, array $attributes = [], boolean $legacy = false): string
+    public function script($chunkName, array $attributes = [], $legacy = false): string
     {
         $attributes['src'] = $url = $this->url($chunkName, $legacy);
 
@@ -282,7 +282,7 @@ class Asset
      * @return string
      * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
      */
-    public function url($chunkName, boolean $legacy = false): string
+    public function url($chunkName, $legacy = false): string
     {
         $path = $this->chunkPath($chunkName, $legacy);
 
@@ -298,7 +298,7 @@ class Asset
      * @return string
      * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
      */
-    public function chunkPath(string $chunkName, boolean $legacy = false): string
+    public function chunkPath(string $chunkName, $legacy = false): string
     {
         if ($legacy) {
           return (string) Arr::get($this->assetsLegacy(), $chunkName, '');
@@ -316,7 +316,7 @@ class Asset
      * @return string
      * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
      */
-    public function path($chunkName, boolean $legacy = false): string
+    public function path($chunkName, $legacy = false): string
     {
         $path = $this->chunkPath($chunkName, $legacy);
 
@@ -332,7 +332,7 @@ class Asset
      * @return string
      * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
      */
-    public function content($chunk, boolean $legacy = false): string
+    public function content($chunk, $legacy = false): string
     {
         $path = $this->path($chunk);
 
