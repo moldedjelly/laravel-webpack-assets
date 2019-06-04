@@ -286,7 +286,7 @@ class Asset
     {
         $path = $this->chunkPath($chunkName, $legacy);
 
-        return $path !== '' ? $this->urlGenerator->url($path) : '';
+        return $path !== '' ? (preg_match("@^https?://@", $path) ? $path : $this->urlGenerator->url($path)) : '';
     }
 
     /**
