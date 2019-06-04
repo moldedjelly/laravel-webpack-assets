@@ -198,7 +198,7 @@ class Asset
 
         $attributes = array_merge($defaults, $attributes);
 
-        $attributes['href'] = $url = $this->url($chunkName);
+        $attributes['href'] = $url = $this->url($chunkName, $legacy);
 
         return $url ? $this->toHtmlString('<link'.$this->attributes($attributes).'>'.PHP_EOL) : '';
     }
