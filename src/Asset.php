@@ -121,7 +121,7 @@ class Asset
         $contents = [];
         try {
             if ($this->devServerUrl != "") {
-              $contents = file_get_contents($this->devServerUrl.$this->manifestFile);
+              $contents = @file_get_contents($this->devServerUrl.$this->manifestFile);
             }
             if (empty($contents)) {
               $contents = $this->filesystem->get($this->manifestFile);
@@ -141,7 +141,7 @@ class Asset
         $contents = [];
         try {
             if ($this->devServerUrl != "") {
-              $contents = file_get_contents($this->devServerUrl.$this->manifestLegacyFile);
+              $contents = @file_get_contents($this->devServerUrl.$this->manifestLegacyFile);
             }
             if (empty($contents)) {
               $contents = $this->filesystem->get($this->manifestLegacyFile);
