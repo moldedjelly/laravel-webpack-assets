@@ -12,6 +12,7 @@ return [
     */
     'file'         => 'manifest.json',
     'file_legacy'  => 'manifest-legacy.json',
+    'dev_server'   => env('WEBPACK_DEV_SERVER', ''),
 
     /*
     |----------------------------------------------------------------------
