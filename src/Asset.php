@@ -187,6 +187,7 @@ class Asset
      *
      * @param $chunkName
      * @param array $attributes
+     * @param boolean $legacy
      *
      * @return string
      * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
@@ -239,6 +240,7 @@ class Asset
      *
      * @param $chunkName
      * @param array $attributes
+     * @param boolean $legacy
      *
      * @return string
      * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
@@ -275,6 +277,7 @@ class Asset
      * Returns full url for chunk.
      *
      * @param $chunkName
+     * @param boolean $legacy
      *
      * @return string
      * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
@@ -290,6 +293,7 @@ class Asset
      * Returns chunk path as inside manifest.
      *
      * @param string $chunkName
+     * @param boolean $legacy
      *
      * @return string
      * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
@@ -307,6 +311,7 @@ class Asset
      * Returns path of chunk from manifest array.
      *
      * @param string $chunkName Name of chunk.
+     * @param boolean $legacy
      *
      * @return string
      * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
@@ -322,6 +327,7 @@ class Asset
      * Returns content of chunk.
      *
      * @param $chunk
+     * @param boolean $legacy
      *
      * @return string
      * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
