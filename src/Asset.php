@@ -16,6 +16,13 @@ class Asset
     protected $assets;
 
     /**
+     * Array of loaded legacy assets.
+     *
+     * @var array
+     */
+    protected $assetsLegacy;
+
+    /**
      * Array of cached files content retrieved via "content" method.
      *
      * @var array
@@ -38,6 +45,13 @@ class Asset
      * @var string
      */
     protected $manifestFile;
+
+    /**
+     * Manifest legacy file path.
+     *
+     * @var string
+     */
+    protected $manifestLegacyFile;
 
     /**
      * Whether to throw exception when given chunk name real path is missing in filesystem.
@@ -75,6 +89,21 @@ class Asset
     }
 
     /**
+     * Returns all loaded legacy assets from file.
+     *
+     * @return array
+     * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
+     */
+    public function assetsLegacy(): array
+    {
+        if ($this->assetsLegacy === null) {
+            $this->fresh();
+        }
+
+        return $this->assetsLegacy;
+    }
+
+    /**
      * Reloads array of assets from manifest file.
      *
      * @return self
@@ -96,6 +125,21 @@ class Asset
         // Fresh assets with new contents
         $this->assets = $contents;
 
+
+        $contents = [];
+        try {
+            $contents = $this->filesystem->get($this->manifestLegacyFile);
+            $contents = json_decode($contents, true);
+        } catch (\Illuminate\Contracts\Filesystem\FileNotFoundException $exception) {
+            if ($this->failOnLoad) {
+                // If we need to fail on load, then throw exception
+                throw new AssetException("Manifest file {$exception->getMessage()} does not exist");
+            }
+        }
+
+        // Fresh assets with new contents
+        $this->assetsLegacy = $contents;
+
         return $this;
     }
 
@@ -116,6 +160,7 @@ class Asset
         }
 
         $this->manifestFile = $config['file'];
+        $this->manifestLegacyFile = $config['file_legacy'];
         $this->failOnLoad = (bool) $config['fail_on_load'];
     }
 
@@ -128,7 +173,7 @@ class Asset
      * @return string
      * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
      */
-    public function style($chunkName, array $attributes = []): string
+    public function style($chunkName, array $attributes = [], boolean $legacy = false): string
     {
         $defaults = ['media' => 'all', 'type' => 'text/css', 'rel' => 'stylesheet'];
 
@@ -180,9 +225,9 @@ class Asset
      * @return string
      * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
      */
-    public function script($chunkName, array $attributes = []): string
+    public function script($chunkName, array $attributes = [], boolean $legacy = false): string
     {
-        $attributes['src'] = $url = $this->url($chunkName);
+        $attributes['src'] = $url = $this->url($chunkName, $legacy);
 
         return $url ? $this->toHtmlString('<script'.$this->attributes($attributes).'></script>'.PHP_EOL) : '';
     }
@@ -216,9 +261,9 @@ class Asset
      * @return string
      * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
      */
-    public function url($chunkName): string
+    public function url($chunkName, boolean $legacy = false): string
     {
-        $path = $this->chunkPath($chunkName);
+        $path = $this->chunkPath($chunkName, $legacy);
 
         return $path !== '' ? $this->urlGenerator->url($path) : '';
     }
@@ -231,9 +276,13 @@ class Asset
      * @return string
      * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
      */
-    public function chunkPath(string $chunkName): string
+    public function chunkPath(string $chunkName, boolean $legacy = false): string
     {
-        return (string) Arr::get($this->assets(), $chunkName, '');
+        if ($legacy) {
+          return (string) Arr::get($this->assetsLegacy(), $chunkName, '');
+        } else {
+          return (string) Arr::get($this->assets(), $chunkName, '');
+        }
     }
 
     /**
@@ -244,9 +293,9 @@ class Asset
      * @return string
      * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
      */
-    public function path($chunkName): string
+    public function path($chunkName, boolean $legacy = false): string
     {
-        $path = $this->chunkPath($chunkName);
+        $path = $this->chunkPath($chunkName, $legacy);
 
         return $path === '' ? '' : $this->urlGenerator->path($path);
     }
@@ -259,7 +308,7 @@ class Asset
      * @return string
      * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
      */
-    public function content($chunk): string
+    public function content($chunk, boolean $legacy = false): string
     {
         $path = $this->path($chunk);
 

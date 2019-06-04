@@ -10,7 +10,8 @@ return [
     | is relative to disk directory. See `disk` parameter.
     |
     */
-    'file'         => 'assets/manifest.json',
+    'file'         => 'manifest.json',
+    'file_legacy'  => 'manifest-legacy.json',
 
     /*
     |----------------------------------------------------------------------
