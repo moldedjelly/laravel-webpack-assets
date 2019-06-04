@@ -23,6 +23,13 @@ class Asset
     protected $assetsLegacy;
 
     /**
+     * Dev Server URL
+     *
+     * @var string
+     */
+    protected $devServerUrl;
+
+    /**
      * Array of cached files content retrieved via "content" method.
      *
      * @var array
@@ -113,7 +120,12 @@ class Asset
     {
         $contents = [];
         try {
-            $contents = $this->filesystem->get($this->manifestFile);
+            if ($this->devServerUrl != "") {
+              $contents = file_get_contents($this->devServerUrl.$this->manifestFile);
+            }
+            if (empty($contents)) {
+              $contents = $this->filesystem->get($this->manifestFile);
+            }
             $contents = json_decode($contents, true);
         } catch (\Illuminate\Contracts\Filesystem\FileNotFoundException $exception) {
             if ($this->failOnLoad) {
@@ -128,7 +140,12 @@ class Asset
 
         $contents = [];
         try {
-            $contents = $this->filesystem->get($this->manifestLegacyFile);
+            if ($this->devServerUrl != "") {
+              $contents = file_get_contents($this->devServerUrl.$this->manifestLegacyFile);
+            }
+            if (empty($contents)) {
+              $contents = $this->filesystem->get($this->manifestLegacyFile);
+            }
             $contents = json_decode($contents, true);
         } catch (\Illuminate\Contracts\Filesystem\FileNotFoundException $exception) {
             if ($this->failOnLoad) {
@@ -159,6 +176,7 @@ class Asset
             }
         }
 
+        $this->devServerUrl = $config['dev_server'];
         $this->manifestFile = $config['file'];
         $this->manifestLegacyFile = $config['file_legacy'];
         $this->failOnLoad = (bool) $config['fail_on_load'];
