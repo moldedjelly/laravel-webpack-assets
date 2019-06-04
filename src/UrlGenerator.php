@@ -1,6 +1,6 @@
 <?php
 
-namespace Malyusha\WebpackAssets;
+namespace Moldedjelly\WebpackAssets;
 
 interface UrlGenerator
 {

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Malyusha\WebpackAssets\Exceptions;
+namespace Moldedjelly\WebpackAssets\Exceptions;
 
 
 use Exception;

@@ -1,5 +1,5 @@
 {
-  "name": "malyusha/laravel-webpack-assets",
+  "name": "moldedjelly/laravel-webpack-assets",
   "description": "Package to use WebpackManifestPlugin in laravel",
   "keywords": ["laravel", "webpack", "laravel-webpack", "laravel assets", "assets", "mix", "webpack manifest plugin laravel"],
   "type": "package",
@@ -22,7 +22,7 @@
   "minimum-stability": "stable",
   "autoload": {
     "psr-4": {
-      "Malyusha\\WebpackAssets\\": "src/"
+      "Moldedjelly\\WebpackAssets\\": "src/"
     },
     "files": [
       "lib.php"
@@ -36,7 +36,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Malyusha\\WebpackAssets\\WebpackAssetsServiceProvider"
+        "Moldedjelly\\WebpackAssets\\WebpackAssetsServiceProvider"
       ]
     },
     "branch-alias": {

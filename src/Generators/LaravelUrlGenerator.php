@@ -1,8 +1,8 @@
 <?php
 
-namespace Malyusha\WebpackAssets\Generators;
+namespace Moldedjelly\WebpackAssets\Generators;
 
-class LaravelUrlGenerator implements \Malyusha\WebpackAssets\UrlGenerator
+class LaravelUrlGenerator implements \Moldedjelly\WebpackAssets\UrlGenerator
 {
     /**
      * @var \Illuminate\Filesystem\FilesystemAdapter

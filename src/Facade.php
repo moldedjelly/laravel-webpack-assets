@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Malyusha\WebpackAssets;
+namespace Moldedjelly\WebpackAssets;
 
 
 class Facade extends \Illuminate\Support\Facades\Facade

@@ -1,10 +1,10 @@
 <?php
 
-namespace Malyusha\WebpackAssets;
+namespace Moldedjelly\WebpackAssets;
 
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
-use Malyusha\WebpackAssets\Exceptions\AssetException;
+use Moldedjelly\WebpackAssets\Exceptions\AssetException;
 
 class Asset
 {
@@ -63,7 +63,7 @@ class Asset
      * Returns all loaded assets from file.
      *
      * @return array
-     * @throws \Malyusha\WebpackAssets\Exceptions\AssetException
+     * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
      */
     public function assets(): array
     {
@@ -78,7 +78,7 @@ class Asset
      * Reloads array of assets from manifest file.
      *
      * @return self
-     * @throws \Malyusha\WebpackAssets\Exceptions\AssetException
+     * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
      */
     public function fresh(): self
     {
@@ -111,7 +111,7 @@ class Asset
     {
         foreach ($required = ['fail_on_load', 'file'] as $item) {
             if (! array_key_exists($item, $config)) {
-                throw new \Malyusha\WebpackAssets\Exceptions\InvalidConfigurationException($required);
+                throw new \Moldedjelly\WebpackAssets\Exceptions\InvalidConfigurationException($required);
             }
         }
 
@@ -126,7 +126,7 @@ class Asset
      * @param array $attributes
      *
      * @return string
-     * @throws \Malyusha\WebpackAssets\Exceptions\AssetException
+     * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
      */
     public function style($chunkName, array $attributes = []): string
     {
@@ -146,7 +146,7 @@ class Asset
      * @param array $attributes
      *
      * @return string
-     * @throws \Malyusha\WebpackAssets\Exceptions\AssetException
+     * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
      */
     public function rawStyle($chunkName, array $attributes = []): string
     {
@@ -162,7 +162,7 @@ class Asset
      * @param array $attributes
      *
      * @return string
-     * @throws \Malyusha\WebpackAssets\Exceptions\AssetException
+     * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
      */
     public function rawScript($chunkName, array $attributes = []): string
     {
@@ -178,7 +178,7 @@ class Asset
      * @param array $attributes
      *
      * @return string
-     * @throws \Malyusha\WebpackAssets\Exceptions\AssetException
+     * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
      */
     public function script($chunkName, array $attributes = []): string
     {
@@ -195,7 +195,7 @@ class Asset
      * @param array $attributes
      *
      * @return string
-     * @throws \Malyusha\WebpackAssets\Exceptions\AssetException
+     * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
      */
     public function image($chunkName, $alt = null, array $attributes = []): string
     {
@@ -214,7 +214,7 @@ class Asset
      * @param $chunkName
      *
      * @return string
-     * @throws \Malyusha\WebpackAssets\Exceptions\AssetException
+     * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
      */
     public function url($chunkName): string
     {
@@ -229,7 +229,7 @@ class Asset
      * @param string $chunkName
      *
      * @return string
-     * @throws \Malyusha\WebpackAssets\Exceptions\AssetException
+     * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
      */
     public function chunkPath(string $chunkName): string
     {
@@ -242,7 +242,7 @@ class Asset
      * @param string $chunkName Name of chunk.
      *
      * @return string
-     * @throws \Malyusha\WebpackAssets\Exceptions\AssetException
+     * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
      */
     public function path($chunkName): string
     {
@@ -257,7 +257,7 @@ class Asset
      * @param $chunk
      *
      * @return string
-     * @throws \Malyusha\WebpackAssets\Exceptions\AssetException
+     * @throws \Moldedjelly\WebpackAssets\Exceptions\AssetException
      */
     public function content($chunk): string
     {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Malyusha\WebpackAssets;
+namespace Moldedjelly\WebpackAssets;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
-use Malyusha\WebpackAssets\Generators\LaravelUrlGenerator;
+use Moldedjelly\WebpackAssets\Generators\LaravelUrlGenerator;
 
 class WebpackAssetsServiceProvider extends ServiceProvider
 {
